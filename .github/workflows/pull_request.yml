@@ -1,0 +1,39 @@
+name: Windup Build
+
+on:
+  workflow_dispatch:
+    inputs: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: "windup/windup-rulesets"
+      - uses: actions/checkout@v2
+        with:
+          repository: "carlosthe19916/windup"
+          ref: WINDUP-3246
+      - uses: actions/checkout@v2
+        with:
+          repository: "carlosthe19916/windup-distribution"
+          ref: WINDUP-3246
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: "8"
+          distribution: "temurin"
+          cache: "maven"
+
+      - name: Build Windup
+        run: mvn clean install -DskipTests -f windup/
+      - name: Build Windup distribution
+        run: mvn clean install -DskipTests -f windup-distribution/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: windup-cli
+          path: windup-distribution/target/mta-cli-*-offline.zip
