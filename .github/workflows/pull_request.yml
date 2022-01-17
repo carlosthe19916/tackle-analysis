@@ -31,6 +31,8 @@ jobs:
           distribution: "temurin"
           cache: "maven"
 
+      - name: Build Windup Rulesets
+        run: mvn clean install -DskipTests -f windup-rulesets/
       - name: Build Windup
         run: mvn clean install -DskipTests -f windup/
       - name: Build Windup distribution
