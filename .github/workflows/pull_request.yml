@@ -12,14 +12,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: "windup/windup-rulesets"
+          path: windup/windup-rulesets
       - uses: actions/checkout@v2
         with:
           repository: "carlosthe19916/windup"
+          path: windup
           ref: WINDUP-3246
       - uses: actions/checkout@v2
         with:
           repository: "carlosthe19916/windup-distribution"
+          path: windup-distribution
           ref: WINDUP-3246
+
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
