@@ -13,6 +13,7 @@ jobs:
         with:
           repository: "windup/windup-rulesets"
           path: windup-rulesets
+          ref: WINDUP-3246
       - uses: actions/checkout@v2
         with:
           repository: "carlosthe19916/windup"
